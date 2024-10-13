@@ -10,6 +10,7 @@ class Dorks:
         
         self.input = input
         self.urls = [
+            
         #cpf e dados confidenciais
         f'https://www.google.com/search?q=inurl:"{self.input}" intext:"cpf" filetype:pdf OR filetype:txt OR filetype:doc',
         f'https://www.google.com/search?q="intext:"confidential" filetype:pdf OR filetype:txt OR filetype:doc',
@@ -80,16 +81,16 @@ class Dorks:
         f'https://www.google.com/search?q=intitle:"index of" inurl:"{self.input}/ftp"',
 
         # Documentos de Projetos
-        f'https://www.google.com/search?q=inurl:"{self.input}" intext:"projeto" filetype:pdf OR filetype:doc OR filetype:ppt',
+        f'https://www.google.com/search?q=inurl:"{self.input}"intext:"projeto" filetype:pdf OR filetype:doc OR filetype:ppt',
 
         # Certificados
-        f'https://www.google.com/search?q=inurl:"{self.input}" intext:"certificado" filetype:pdf OR filetype:doc',
+        f'https://www.google.com/search?q=inurl:"{self.input}"intext:"certificado" filetype:pdf OR filetype:doc',
         
         # Documentos de Propostas
         f'https://www.google.com/search?q=inurl:"{self.input}" intext:"proposta" filetype:pdf OR filetype:doc',
         
         # Dados de Clientes
-        f'https://www.google.com/search?q=inurl:"{self.input}" intext:"lista de clientes" filetype:csv OR filetype:xls',
+        f'https://www.google.com/search?q=inurl:"{self.input}"intext:"lista de clientes" filetype:csv OR filetype:xls',
         
         # Informações sobre fornecedores
         f'https://www.google.com/search?q=inurl:"{self.input}" intext:"fornecedor" filetype:pdf OR filetype:doc',
@@ -124,7 +125,6 @@ class Dorks:
 
     #methodo async para requests
     async def fetch(self) -> None:
-        # Escolhe aleatoriamente uma URL da lista
         try:
             pattern = r'Sua pesquisa não encontrou nenhum documento correspondente' #responsta do body quand
             # Cria uma sessão HTTP assíncrona com os headers (user agent)
@@ -143,11 +143,11 @@ class Dorks:
                                 print(f"{url}")
                                 
                         elif response.status == 429:
-                            await asyncio.sleep(20) 
+                            await asyncio.sleep(10) 
                         else:
                             # Exibe uma mensagem de erro com o código de status, se a requisição falhar
                             return(f"Failed to retrieve data. Status code: {response.status}")
-                    await asyncio.sleep(random.uniform(1, 10))
+                await asyncio.sleep(random.uniform(1, 10))
         except Exception as e:
-                # Captura e exibe qualquer exceção ocorrida durante o processo de requisição
+                # Captura e exibe exceçoes
                 print(f'Erro: {e}')
